@@ -19,23 +19,32 @@ public class ProblemType2 {
     private double serviseRate=0.0;         //
     private double initialCustomers =0;     // M
     private double capacity=0;              // K
-    private double time=0;                 // t
-    private double ti=0;                   // ti
-    private double numberOfCoustomer=0;    //  n(t)
-    private double watingTime=0;           //Wq(n)
+    private double time=0;                  // t
+    private double timeStesdyState=0;       // ti
+    private double numberOfCoustomer=0;     //  n(t) at time 
+    private double watingTime=0;            //Wq(n) for coustmoer number n
+    private double nCustomer=0;           
+    /* findTimeStesdyState : find Time of the steady state of the system 
+     *  arguments          : initialCustomers,arivaleRate,serviseRate
+     *  return             : time of the steady state 
+     */ 
     
     
-    
-    
-    public double findTi(double initialCustomers,double arivaleRate,double serviseRate){
+    public double findTimeStesdyState(double initialCustomers,double arivaleRate,double serviseRate){
+        int intialM=0;
+        timeStesdyState=(int)((initialCustomers)/((serviseRate)-(arivaleRate)));
         
-        ti=(int)((initialCustomers)/(serviseRate-arivaleRate));
-        while(initialCustomers==((int)(serviseRate*ti)-(int)(arivaleRate*ti))){
-            ti-=arivaleRate;
+        
+        intialM= (int)(serviseRate*timeStesdyState)-(int)(arivaleRate*timeStesdyState);
+ 
+        while( initialCustomers == intialM ){
+            timeStesdyState-=(1/arivaleRate);
+             intialM= (int)(serviseRate*timeStesdyState)-(int)(arivaleRate*timeStesdyState);
         }
-          ti+=arivaleRate;
         
-        return ti;
+          timeStesdyState+=(1/arivaleRate);
+        
+        return timeStesdyState;
     }
     
     /* findNumberOfCustomer : find number of customer in system in time T
@@ -48,12 +57,16 @@ public class ProblemType2 {
         this.serviseRate=use.convertToDouble(strServiseRate);
         this.time=use.convertToDouble(strTime);
         this.initialCustomers=use.convertToDouble(strInitialCustomers);
+     
+        timeStesdyState=findTimeStesdyState(initialCustomers, arivaleRate, serviseRate);
         
+        if( time < timeStesdyState){
         numberOfCoustomer= initialCustomers +(int)(arivaleRate*time)-(int)(serviseRate*time);
-        if(numberOfCoustomer>=0) 
-         return numberOfCoustomer;
-        else 
-            return 0;
+        }else{
+            numberOfCoustomer=0;
+        }
+       
+            return numberOfCoustomer;
     } 
     
      /* watingTime  : calculate wating time for custome number n
@@ -61,16 +74,23 @@ public class ProblemType2 {
      *  return      : wating time for custome number n
      */ 
     
-    public double watingTime(double initialCustomers,double arivaleRate,double serviseRate,double nCustomer){
-        if(nCustomer==0){
-            watingTime=(initialCustomers-1)/(2*serviseRate);
-        }else{
-            watingTime=((initialCustomers-1+nCustomer)*(1.0/serviseRate))-(nCustomer*(1.0/arivaleRate));
+    public double watingTime(String initialCustomers,String arivaleRate,String serviseRate,String nCustomer){
+        this.arivaleRate=use.convertToDouble(arivaleRate);
+        this.serviseRate=use.convertToDouble(serviseRate);
+        this.initialCustomers=use.convertToDouble(initialCustomers);
+        this.nCustomer=use.convertToDouble(nCustomer);
+     
+        timeStesdyState=findTimeStesdyState(this.initialCustomers, this.arivaleRate, this.serviseRate);
+        
+        if(this.nCustomer==0){
+            watingTime=(this.initialCustomers-1)/(2*this.serviseRate);
+        }else if(this.nCustomer < (this.arivaleRate*timeStesdyState)){
+            watingTime=(int)((this.initialCustomers-1+this.nCustomer)*(1.0/this.serviseRate))-(this.nCustomer*(1.0/this.arivaleRate));
         }
-        if(watingTime>=0)
-            return watingTime; 
-        else
-            return 0;
+        else{
+            watingTime=0;
+        }
+            return watingTime;
     }
     
     

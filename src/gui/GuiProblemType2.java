@@ -26,7 +26,7 @@ public class GuiProblemType2 extends javax.swing.JFrame {
         intiialM = new javax.swing.JTextField();
         customerN = new javax.swing.JTextField();
         numberOfCustomer = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        wating = new javax.swing.JButton();
         result = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
@@ -45,8 +45,13 @@ public class GuiProblemType2 extends javax.swing.JFrame {
             }
         });
 
-        jButton2.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        jButton2.setText("Wating time");
+        wating.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        wating.setText("Wating time");
+        wating.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                watingActionPerformed(evt);
+            }
+        });
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel1.setText("Time");
@@ -95,11 +100,11 @@ public class GuiProblemType2 extends javax.swing.JFrame {
                         .addComponent(customerN, javax.swing.GroupLayout.PREFERRED_SIZE, 293, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 66, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(numberOfCustomer, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(result, javax.swing.GroupLayout.PREFERRED_SIZE, 254, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(result, javax.swing.GroupLayout.PREFERRED_SIZE, 254, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                        .addComponent(wating, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(numberOfCustomer, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 196, Short.MAX_VALUE)))
                 .addGap(25, 25, 25))
         );
         layout.setVerticalGroup(
@@ -127,7 +132,7 @@ public class GuiProblemType2 extends javax.swing.JFrame {
                         .addGap(27, 27, 27)
                         .addComponent(numberOfCustomer, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(29, 29, 29)
-                        .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(wating, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(44, 44, 44)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(intiialM, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -141,17 +146,17 @@ public class GuiProblemType2 extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-double dresult=0;
+double dNumber=0;
     private void numberOfCustomerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_numberOfCustomerActionPerformed
-     // TODO add your handling code here:
+    
        
        
           if( use.isValied(arivale.getText()  )&& 
               use.isValied(servise.getText()  )&&
               use.isValied(time.getText()     )&& 
               use.isValied(intiialM.getText() ) )   {
-          dresult= problem2.findNumberOfCustomer(intiialM.getText(),arivale.getText(),servise.getText() ,time.getText());
-         result.setText(String.valueOf(dresult));
+          dNumber= problem2.findNumberOfCustomer(intiialM.getText(),arivale.getText(),servise.getText() ,time.getText());
+         result.setText(String.valueOf(dNumber));
           }else{
               result.setText("error");
           }
@@ -159,6 +164,27 @@ double dresult=0;
      
      
     }//GEN-LAST:event_numberOfCustomerActionPerformed
+    
+    double dTime=0;
+    private void watingActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_watingActionPerformed
+
+        if( use.isValied(arivale.getText()  )&& 
+              use.isValied(servise.getText()  )&&
+              use.isValied( customerN.getText())&& 
+              use.isValied(intiialM.getText() ) )  
+        {
+          
+            dTime= problem2.watingTime(intiialM.getText(),arivale.getText(), servise.getText() , customerN.getText());
+        
+          
+          
+          result.setText(String.valueOf(dTime));
+          }else{
+              result.setText("error");
+          }
+        
+        
+    }//GEN-LAST:event_watingActionPerformed
 
     /**
      * @param args the command line arguments
@@ -198,7 +224,6 @@ double dresult=0;
     private javax.swing.JTextField arivale;
     private javax.swing.JTextField customerN;
     private javax.swing.JTextField intiialM;
-    private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -209,5 +234,6 @@ double dresult=0;
     private javax.swing.JTextField result;
     private javax.swing.JTextField servise;
     private javax.swing.JTextField time;
+    private javax.swing.JButton wating;
     // End of variables declaration//GEN-END:variables
 }

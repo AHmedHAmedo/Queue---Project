@@ -57,10 +57,12 @@ public class M_M_1_K extends ParentClass{
         return lq;
     }
 
+    @Override
     public double W(){
         double w = L()/lambda_dash;
         return w;
     }
+    @Override
     public double Wq(){
         double wq = W() - (1/mu);
         return wq;
