@@ -16,7 +16,9 @@ public class HelpTool {
         
        char []c = input.toCharArray();
        int coun = 0;
-       
+       if(c.length==0){
+           return false; 
+          }
        if(c[0]=='/')
            return false;
        

@@ -4,17 +4,24 @@
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
             <file>file:/D:/My_Githup/Queue---Project/src/stochastic/M_M_C_K.java</file>
-            <file>file:/D:/My_Githup/Queue---Project/src/stochastic/Main.java</file>
-            <file>file:/D:/My_Githup/Queue---Project/src/queueproject/QueueProject.java</file>
-            <file>file:/D:/My_Githup/Queue---Project/src/gui/GuiMain.java</file>
             <file>file:/D:/My_Githup/Queue---Project/src/stochastic/ParentClass.java</file>
             <file>file:/D:/My_Githup/Queue---Project/src/detrmnistic/ProblemType2.java</file>
-            <file>file:/D:/My_Githup/Queue---Project/src/detrmnistic/ProblemType1.java</file>
+            <file>file:/D:/My_Githup/Queue---Project/src/help/HelpTool.java</file>
+            <file>file:/D:/My_Githup/Queue---Project/src/gui/Gui_M_M_C.java</file>
             <file>file:/D:/My_Githup/Queue---Project/src/stochastic/M_M_C.java</file>
             <file>file:/D:/My_Githup/Queue---Project/src/stochastic/M_M_1_K.java</file>
-            <file>file:/D:/My_Githup/Queue---Project/src/gui/GuiProblemType1.java</file>
+            <file>file:/D:/My_Githup/Queue---Project/src/gui/Gui_M_M_1.java</file>
             <file>file:/D:/My_Githup/Queue---Project/src/stochastic/M_M_1.java</file>
             <file>file:/D:/My_Githup/Queue---Project/src/gui/GuiProblemType2.java</file>
+            <file>file:/D:/My_Githup/Queue---Project/src/stochastic/Main.java</file>
+            <file>file:/D:/My_Githup/Queue---Project/src/queueproject/QueueProject.java</file>
+            <file>file:/D:/My_Githup/Queue---Project/src/gui/GuiStochastic.java</file>
+            <file>file:/D:/My_Githup/Queue---Project/src/detrmnistic/ProblemType1.java</file>
+            <file>file:/D:/My_Githup/Queue---Project/src/gui/GuiDermnintic.java</file>
+            <file>file:/D:/My_Githup/Queue---Project/src/gui/GuiProblemType1.java</file>
+            <file>file:/D:/My_Githup/Queue---Project/src/gui/GuiMainFrame.java</file>
+            <file>file:/D:/My_Githup/Queue---Project/src/gui/Gui_M_M_C_K.java</file>
+            <file>file:/D:/My_Githup/Queue---Project/src/gui/Gui_M_M_1_K.java</file>
         </group>
     </open-files>
 </project-private>
