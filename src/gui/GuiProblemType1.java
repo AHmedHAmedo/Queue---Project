@@ -2,7 +2,19 @@ package gui;
 
 
 
+import detrmnistic.ProblemType1;
 import help.HelpTool;
+import java.awt.BasicStroke;
+import java.awt.Color;
+import javax.swing.JOptionPane;
+import org.jfree.chart.ChartFactory;
+import org.jfree.chart.ChartPanel;
+import org.jfree.chart.JFreeChart;
+import org.jfree.chart.plot.PlotOrientation;
+import org.jfree.chart.plot.XYPlot;
+import org.jfree.chart.renderer.xy.XYLineAndShapeRenderer;
+import org.jfree.data.xy.XYSeries;
+import org.jfree.data.xy.XYSeriesCollection;
 
 
 /**
@@ -43,6 +55,7 @@ public class GuiProblemType1 extends javax.swing.JFrame {
         numberN = new javax.swing.JTextField();
         jLabel7 = new javax.swing.JLabel();
         wating = new javax.swing.JButton();
+        jButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(0, 0, 0));
@@ -99,6 +112,15 @@ public class GuiProblemType1 extends javax.swing.JFrame {
             }
         });
 
+        jButton1.setBackground(new java.awt.Color(255, 51, 51));
+        jButton1.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jButton1.setText("Get graph");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -141,8 +163,13 @@ public class GuiProblemType1 extends javax.swing.JFrame {
                                     .addComponent(clear, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                         .addContainerGap())))
             .addGroup(layout.createSequentialGroup()
-                .addGap(317, 317, 317)
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 195, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(317, 317, 317)
+                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 195, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(367, 367, 367)
+                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -171,7 +198,7 @@ public class GuiProblemType1 extends javax.swing.JFrame {
                         .addComponent(wating, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(29, 29, 29)
                         .addComponent(clear, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 81, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 86, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(32, 32, 32)
@@ -186,7 +213,9 @@ public class GuiProblemType1 extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(numberN, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(134, Short.MAX_VALUE))
+                .addGap(36, 36, 36)
+                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(58, Short.MAX_VALUE))
         );
 
         pack();
@@ -212,7 +241,7 @@ public class GuiProblemType1 extends javax.swing.JFrame {
               
           }
           else{
-              result.setText("error");
+               JOptionPane.showMessageDialog(null, "Invalid Input");
           }
         
       
@@ -259,13 +288,52 @@ public class GuiProblemType1 extends javax.swing.JFrame {
               
           }
           else{
-              result.setText("error");
+               JOptionPane.showMessageDialog(null, "Invalid Input");
           }
         
         
         
         
     }//GEN-LAST:event_watingActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+         XYSeries s1 = new XYSeries("Number Of Customer");
+         ProblemType1  pro=new ProblemType1();
+        
+            int ti = (int) pro.calculateTimeBalk(arival.getText(), service.getText(), capacity.getText());  
+       
+      for( int t = 0 ; t < ti+10; t++)
+        {       
+            s1.add(t , pro.numberOfCoustmer(arival.getText(), service.getText(),Integer.toString(t), capacity.getText()));
+            
+            s1.add(t+1 ,pro.numberOfCoustmer(arival.getText(), service.getText(), Integer.toString(t), capacity.getText()));
+               
+        }
+                  
+       
+         
+        XYSeriesCollection dataset = new XYSeriesCollection();
+        dataset.addSeries(s1);
+        JFreeChart chart = ChartFactory.createXYLineChart(
+                "Number of customer", // Title
+                "Time", // x-axis Label
+                "Number of customer", // y-axis Label
+                dataset, // Dataset
+                PlotOrientation.VERTICAL, // Plot Orientation
+                true, true, false );
+        ChartPanel chartPanel = new ChartPanel( chart );
+        chartPanel.setPreferredSize( new java.awt.Dimension( 560 , 367 ) );
+        final XYPlot plot = chart.getXYPlot( );
+        XYLineAndShapeRenderer renderer = new XYLineAndShapeRenderer( );
+        renderer.setSeriesPaint( 3 , Color.RED );
+        renderer.setSeriesStroke( 10 , new BasicStroke( 5.0f ) );
+        plot.setRenderer( renderer );
+        setContentPane( chartPanel );
+        this.setVisible(true);
+
+
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -320,6 +388,7 @@ public class GuiProblemType1 extends javax.swing.JFrame {
     private javax.swing.JButton calculte;
     private javax.swing.JTextField capacity;
     private javax.swing.JButton clear;
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

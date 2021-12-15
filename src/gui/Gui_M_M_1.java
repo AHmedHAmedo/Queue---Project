@@ -165,8 +165,9 @@ public class Gui_M_M_1 extends javax.swing.JFrame {
 
     private void Calculate_M_M_1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Calculate_M_M_1ActionPerformed
         // TODO add your handling code here:
-        if (use2.isValied(arrivalRate.getText())
-                && use2.isValied(serviceRate.getText())) {
+        
+        if (     use2.isValied(arrivalRate.getText())&&
+                 use2.isValied(serviceRate.getText()) ) {
 
             double lamda = use2.convertToDouble(arrivalRate.getText());
             double mu = use2.convertToDouble(serviceRate.getText());

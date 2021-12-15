@@ -1,7 +1,19 @@
 
 package gui;
+import detrmnistic.ProblemType1;
 import help.HelpTool;
 import detrmnistic.ProblemType2;
+import java.awt.BasicStroke;
+import java.awt.Color;
+import javax.swing.JOptionPane;
+import org.jfree.chart.ChartFactory;
+import org.jfree.chart.ChartPanel;
+import org.jfree.chart.JFreeChart;
+import org.jfree.chart.plot.PlotOrientation;
+import org.jfree.chart.plot.XYPlot;
+import org.jfree.chart.renderer.xy.XYLineAndShapeRenderer;
+import org.jfree.data.xy.XYSeries;
+import org.jfree.data.xy.XYSeriesCollection;
 
 
 public class GuiProblemType2 extends javax.swing.JFrame {
@@ -35,6 +47,7 @@ public class GuiProblemType2 extends javax.swing.JFrame {
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         clear = new javax.swing.JButton();
+        jButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -80,6 +93,15 @@ public class GuiProblemType2 extends javax.swing.JFrame {
             }
         });
 
+        jButton1.setBackground(new java.awt.Color(255, 51, 51));
+        jButton1.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jButton1.setText("Get graph");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -118,6 +140,10 @@ public class GuiProblemType2 extends javax.swing.JFrame {
                             .addComponent(numberOfCustomer, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 199, Short.MAX_VALUE))
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addGap(25, 25, 25))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(366, 366, 366)
+                .addComponent(jButton1)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -158,7 +184,9 @@ public class GuiProblemType2 extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(customerN, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(149, Short.MAX_VALUE))
+                .addGap(54, 54, 54)
+                .addComponent(jButton1)
+                .addContainerGap(64, Short.MAX_VALUE))
         );
 
         pack();
@@ -175,7 +203,7 @@ double dNumber=0;
           dNumber= problem2.findNumberOfCustomer(intiialM.getText(),arivale.getText(),servise.getText() ,time.getText());
          result.setText(String.valueOf(dNumber));
           }else{
-              result.setText("error");
+                JOptionPane.showMessageDialog(null, "Invalid Input");
           }
     
      
@@ -197,7 +225,7 @@ double dNumber=0;
           
           result.setText(String.valueOf(dTime));
           }else{
-              result.setText("error");
+                JOptionPane.showMessageDialog(null, "Invalid Input");
           }
         
         
@@ -213,6 +241,47 @@ double dNumber=0;
         intiialM.setText("");
 
     }//GEN-LAST:event_clearActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+             XYSeries s1 = new XYSeries("Number Of Customer");
+         ProblemType2  pro=new ProblemType2();
+        
+         double intia=use.convertToDouble(intiialM.getText());
+         double ariv=use.convertToDouble(arivale.getText());
+         double ser=use.convertToDouble(servise.getText());
+            int ti = (int) pro.findTimeStesdyState(intia, ariv, ser);
+       
+      for( int t = 0 ; t < ti+10; t++)
+        {       
+            s1.add(t , pro.findNumberOfCustomer(intiialM.getText(),arivale.getText(),servise.getText(),Integer.toString(t)));
+            
+            s1.add(t+1 ,pro.findNumberOfCustomer(intiialM.getText(),arivale.getText(),servise.getText(),Integer.toString(t)));
+               
+        }
+                  
+       
+         
+        XYSeriesCollection dataset = new XYSeriesCollection();
+        dataset.addSeries(s1);
+        JFreeChart chart = ChartFactory.createXYLineChart(
+                "Number of customer", // Title
+                "Time", // x-axis Label
+                "Number of customer", // y-axis Label
+                dataset, // Dataset
+                PlotOrientation.VERTICAL, // Plot Orientation
+                true, true, false );
+        ChartPanel chartPanel = new ChartPanel( chart );
+        chartPanel.setPreferredSize( new java.awt.Dimension( 560 , 367 ) );
+        final XYPlot plot = chart.getXYPlot( );
+        XYLineAndShapeRenderer renderer = new XYLineAndShapeRenderer( );
+        renderer.setSeriesPaint( 3 , Color.RED );
+        renderer.setSeriesStroke( 10 , new BasicStroke( 5.0f ) );
+        plot.setRenderer( renderer );
+        setContentPane( chartPanel );
+        this.setVisible(true);
+
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -253,6 +322,7 @@ double dNumber=0;
     private javax.swing.JButton clear;
     private javax.swing.JTextField customerN;
     private javax.swing.JTextField intiialM;
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
